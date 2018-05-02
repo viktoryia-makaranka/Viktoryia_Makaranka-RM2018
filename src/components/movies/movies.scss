@@ -1,7 +1,19 @@
 .movies {
-  &-list {
+  &__list {
     display: flex;
     flex-wrap: wrap;
     margin: 0 -15px;
+  }
+
+  &__controls {
+    background: whitesmoke;
+
+    &-wrapper {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+      padding: 10px 0;
+    }
   }
 }

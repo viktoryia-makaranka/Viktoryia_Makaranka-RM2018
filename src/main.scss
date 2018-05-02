@@ -1,3 +1,9 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 .app-wrapper {
   display: flex;
   flex-direction: column;
@@ -15,5 +21,39 @@
     flex: 1;
     justify-content: center;
     font-size: 42px;
+  }
+
+  .row {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .flex {
+    align-items: center;
+    display: flex;
+  }
+
+  .container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    margin: auto;
+    max-width: 1200px;
+    padding: 0 30px;
+    width: 100%;
+  }
+
+  .wrapper {
+    display: flex;
+  }
+
+  .flex-1 {
+    flex: 1;
+  }
+
+  .flex-2 {
+    flex: 2;
   }
 }

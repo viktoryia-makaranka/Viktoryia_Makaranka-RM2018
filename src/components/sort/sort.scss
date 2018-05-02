@@ -1,0 +1,17 @@
+.sorting {
+  &, &__controls {
+    display: flex;
+  }
+
+  &__title, &__controls-item:not(:last-child) {
+    margin-right: 15px;
+  }
+
+  &__controls-item {
+    cursor: pointer;
+
+    &--active {
+      color: coral;
+    }
+  }
+}

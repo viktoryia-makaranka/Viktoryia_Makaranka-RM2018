@@ -1,6 +1,11 @@
 import React from 'react'
 
-const Footer = () => (<footer><a href="https://reelgood.com/roulette/netflix">netflixroulette</a></footer>)
+const Footer = () => (
+  <footer>
+    <div className="container">
+      <a href="https://reelgood.com/roulette/netflix">netflixroulette</a>
+    </div>
+  </footer>)
 
 export default Footer
 
