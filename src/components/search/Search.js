@@ -13,7 +13,11 @@ export default class Search extends Component {
     return (
       <form className="search" onSubmit={ (e) => {
         e.preventDefault()
-        this.props.onSubmitHandler(this.state.searchText, this.state.activeSearchByParam)
+        if (this.state.activeSearchByParam) {
+          this.props.onSubmitHandler(this.state.searchText, this.state.activeSearchByParam)
+        } else {
+          this.props.onSubmitHandler(this.state.searchText)
+        }
       }}>
         <div className="container">
           <div className="search__header">netflixroulette</div>
@@ -23,7 +27,7 @@ export default class Search extends Component {
           <input type="text"
                  className="search__input"
                  placeholder={ this.props.placeholder || '' }
-                 onChange={ (e) => { this.setState({ searchText: e.target.value }) }}/>
+                 onChange={ (e) => { this.setState({ ...this.state, searchText: e.target.value }) }}/>
           <div className="search__controls">
             <div className="search__search-by">
               { this.props.searchByParams &&

@@ -5,22 +5,11 @@ import Sort from '../sort/Sort'
 
 import { SortContext } from '../../index.js'
 
-const Movies = ({ movies, sortChangeHandler, activeSortItem, info, showSorting, onChangeCurrentMovie }) => {
-
-  // help to check ErrorBoundary
-  // throw new Error('something went wrong')
+const Movies = ({ movies, sortChangeHandler, activeSortItem, info, showSorting = false, onChangeCurrentMovie, sortData }) => {
 
   const moviesList = movies.map((movie) => {
       return (<Movie onChangeCurrentMovie={ onChangeCurrentMovie } key={ movie.id } movie={ movie }/>)
   })
-
-  const sortData = [{
-    name: 'release date',
-    val: 'release_date'
-  }, {
-    name: 'rating',
-    val: 'vote_average'
-  }]
 
   return (
     <div className="movies">
@@ -29,7 +18,7 @@ const Movies = ({ movies, sortChangeHandler, activeSortItem, info, showSorting, 
           <div className="movies__controls-wrapper">
             <div className="movies__info">{ info }</div>
             {
-              showSorting && <Sort sortData={ sortData } onSortChange={ sortChangeHandler } activeItem={ activeSortItem }/>
+              showSorting && (<Sort sortData={ sortData } onSortChange={ sortChangeHandler } activeItem={ activeSortItem }/>)
             }
           </div>
         </div>

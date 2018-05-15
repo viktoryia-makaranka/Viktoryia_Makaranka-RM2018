@@ -2,7 +2,11 @@ import React from 'react'
 
 import Movies from '../movies/Movies'
 
-const MovieDetails = ({ movies, currentMovie, searchText, searchBy, onChangeCurrentMovie }) => {
+const MovieDetails = ({ movies,
+                        currentMovie,
+                        searchText,
+                        searchBy,
+                        onChangeCurrentMovie }) => {
   const currentIndex = movies.indexOf(currentMovie)
   let moviesArray = [...movies]
   moviesArray.splice(currentIndex, 1)
@@ -27,12 +31,15 @@ const MovieDetails = ({ movies, currentMovie, searchText, searchBy, onChangeCurr
             </div>
           </div>
         </div>
-        <div className="container">
-          <Movies movies={ moviesArray }
+        {
+          moviesArray.length &&
+          (<div className="container related-movies">
+            <Movies movies={ moviesArray }
                   showSorting={ false }
                   onChangeCurrentMovie={ onChangeCurrentMovie }
                   info={`Films by ${ searchText } ${ searchBy }`}/>
-        </div>
+          </div>)
+        }
       </div>
     </div>
   )

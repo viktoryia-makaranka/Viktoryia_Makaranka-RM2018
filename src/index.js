@@ -7,7 +7,7 @@ import Search from './components/search/Search'
 import Footer from './components/footer/Footer'
 import ErrorBoundary from './components/error/Error'
 
-class App extends React.Component {
+export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -15,7 +15,14 @@ class App extends React.Component {
       searchBy: 'title',
       sortBy: 'release_date',
       searchText: '',
-      currentMovie: {}
+      currentMovie: {},
+      sortData: [{
+        name: 'release date',
+        val: 'release_date'
+      }, {
+        name: 'rating',
+        val: 'vote_average'
+      }]
     }
     this.getResults = this.getResults.bind(this)
     this.onSubmitHandler = this.onSubmitHandler.bind(this)
@@ -74,7 +81,8 @@ render() {
                             sortChangeHandler={ this.sortChangeHandler }
                             info={`${ this.state.movies.length } movies found`}
                             onChangeCurrentMovie={ this.onChangeCurrentMovie }
-                            activeSortItem={ this.state.sortBy }/>
+                            activeSortItem={ this.state.sortBy }
+                            sortData={ this.state.sortData }/>
                   </div>
                   <div className="flex-1">
                     <MovieDetails onChangeCurrentMovie={ this.onChangeCurrentMovie }
@@ -94,7 +102,6 @@ render() {
   }
 }
 
-ReactDOM.render(<App/>, document.getElementById('root'))
+ReactDOM.render(<App/>, document.getElementById('root') || document.createElement('div'))
 
 import './main.scss'
-
