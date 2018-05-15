@@ -78,6 +78,7 @@ render() {
                 (<div className="wrapper">
                   <div className="flex-1">
                     <Movies movies={ this.state.movies }
+                            showSorting={ true }
                             sortChangeHandler={ this.sortChangeHandler }
                             info={`${ this.state.movies.length } movies found`}
                             onChangeCurrentMovie={ this.onChangeCurrentMovie }

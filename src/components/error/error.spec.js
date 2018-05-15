@@ -8,6 +8,8 @@ describe('<ErrorBoundary />', () => {
   beforeAll(() => {
     ErrorBoundary.prototype.componentDidCatch = jest.fn()
 
+    console.error = jest.fn()
+
     ErrorChild = () => {
       throw new Error('Error thrown from a child')
       return (<div>Error</div>)
