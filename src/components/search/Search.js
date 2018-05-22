@@ -1,23 +1,18 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-export default class Search extends Component {
+import MOVIES_API from '../../redux/movies/actions'
+
+class Search extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      activeSearchByParam: props.searchByParams && props.searchByParams.length ? props.searchByParams[0] : '',
-      searchText: ''
-    }
   }
 
   render() {
     return (
       <form className="search" onSubmit={ (e) => {
         e.preventDefault()
-        if (this.state.activeSearchByParam) {
-          this.props.onSubmitHandler(this.state.searchText, this.state.activeSearchByParam)
-        } else {
-          this.props.onSubmitHandler(this.state.searchText)
-        }
+        this.props.getMovies(this.props.searchParams)
       }}>
         <div className="container">
           <div className="search__header">netflixroulette</div>
@@ -27,7 +22,7 @@ export default class Search extends Component {
           <input type="text"
                  className="search__input"
                  placeholder={ this.props.placeholder || '' }
-                 onChange={ (e) => { this.setState({ ...this.state, searchText: e.target.value }) }}/>
+                 onChange={ (e) => { this.props.changeSearchText(e.target.value) }}/>
           <div className="search__controls">
             <div className="search__search-by">
               { this.props.searchByParams &&
@@ -35,9 +30,9 @@ export default class Search extends Component {
                 <div className="search__search-by-title">search by</div>
                 {
                   this.props.searchByParams.map((searchFilter, index) =>
-                    <div className={`search__search-by-item${ this.state.activeSearchByParam === searchFilter ? ' search__search-by-item--active' : ''}`}
+                    <div className={`search__search-by-item${ this.props.searchParams.searchBy === searchFilter ? ' search__search-by-item--active' : ''}`}
                          key={ index }
-                         onClick={ () => { this.setState({ activeSearchByParam: searchFilter }) }}>{ searchFilter }</div>
+                         onClick={ () => { this.props.changeSearchBy(searchFilter) }}>{ searchFilter }</div>
                   )
                 }
               </div>
@@ -50,5 +45,25 @@ export default class Search extends Component {
     )
   }
 }
+const mapStateToProps = ({ movies }) => ({
+  movies: movies.movies,
+  searchParams: movies.searchParams,
+  searchByParams: movies.searchByParams,
+  currentMovie: movies.currentMovie
+})
+
+const mapDispatchToProps = dispatch => ({
+  getMovies(params) {
+    dispatch(MOVIES_API.getMovies(params))
+  },
+  changeSearchBy(newVal) {
+    dispatch(MOVIES_API.changeSearchBy(newVal))
+  },
+  changeSearchText(newVal) {
+    dispatch(MOVIES_API.changeSearchText(newVal))
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search)
 
 import './search.scss'

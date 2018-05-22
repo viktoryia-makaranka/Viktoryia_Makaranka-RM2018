@@ -3,12 +3,10 @@ import React, { Component } from 'react'
 import Movie from '../movie/Movie'
 import Sort from '../sort/Sort'
 
-import { SortContext } from '../../index.js'
-
-const Movies = ({ movies, sortChangeHandler, activeSortItem, info, showSorting = false, onChangeCurrentMovie, sortData }) => {
+const Movies = ({ movies = [], info = '', showSorting = false }) => {
 
   const moviesList = movies.map((movie) => {
-      return (<Movie onChangeCurrentMovie={ onChangeCurrentMovie } key={ movie.id } movie={ movie }/>)
+      return (<Movie key={ movie.id } movie={ movie }/>)
   })
 
   return (
@@ -18,7 +16,7 @@ const Movies = ({ movies, sortChangeHandler, activeSortItem, info, showSorting =
           <div className="movies__controls-wrapper">
             <div className="movies__info">{ info }</div>
             {
-              showSorting && (<Sort sortData={ sortData } onSortChange={ sortChangeHandler } activeItem={ activeSortItem }/>)
+              showSorting && (<Sort />)
             }
           </div>
         </div>
@@ -29,6 +27,7 @@ const Movies = ({ movies, sortChangeHandler, activeSortItem, info, showSorting =
     </div>
   )
 }
+
 
 export default Movies
 

@@ -1,9 +1,19 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-const Movie = ({ movie, onChangeCurrentMovie }) => {
-  const changeCurrentMovie = () => { onChangeCurrentMovie(movie) }
+import MOVIES_API from '../../redux/movies/actions'
+
+const Movie = ({ movie = {}, changeCurrentMovie, getSameGenreMovies, currentMovie }) => {
+  const onChangeCurrentMovie = () => {
+    changeCurrentMovie(movie)
+  }
+
+  if (movie === currentMovie) {
+    getSameGenreMovies(movie.genres[0])
+  }
+
   return (
-    <div className="movie-card" onClick={ changeCurrentMovie }>
+    <div className="movie-card" onClick={ onChangeCurrentMovie }>
       <img src={ movie.poster_path }/>
       <div className="movie-card__info">
         <div className="movie-card__title-row">
@@ -16,6 +26,19 @@ const Movie = ({ movie, onChangeCurrentMovie }) => {
   )
 }
 
-export default Movie
+const mapStateToProps = ({ movies }) => ({
+  currentMovie: movies.currentMovie
+})
+
+const mapDispatchToProps = dispatch => ({
+  changeCurrentMovie(movie) {
+    dispatch(MOVIES_API.changeCurrentMovie(movie))
+  },
+  getSameGenreMovies(genre) {
+    dispatch(MOVIES_API.getSameGenreMovies(genre))
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Movie)
 
 import './movie.scss'

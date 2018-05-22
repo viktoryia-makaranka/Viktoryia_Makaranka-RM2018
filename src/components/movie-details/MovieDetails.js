@@ -1,14 +1,15 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
+import MOVIES_API from '../../redux/movies/actions'
 
 import Movies from '../movies/Movies'
 
-const MovieDetails = ({ movies,
+const MovieDetails = ({ sameGenreMovies,
                         currentMovie,
-                        searchText,
-                        searchBy,
-                        onChangeCurrentMovie }) => {
-  const currentIndex = movies.indexOf(currentMovie)
-  let moviesArray = [...movies]
+                        searchParams }) => {
+  const currentIndex = sameGenreMovies.indexOf(currentMovie)
+  let moviesArray = [...sameGenreMovies]
   moviesArray.splice(currentIndex, 1)
   return (<div className="movie-details">
       <div className="movie-details__wrapper">
@@ -22,7 +23,7 @@ const MovieDetails = ({ movies,
                 <div className="movie-details__title">{ currentMovie.title }</div>
                 <div className="movie-details__raiting">{ currentMovie.vote_average }</div>
               </div>
-              <div className="movie-details__genres">{ currentMovie.genres.join(' & ') }</div>
+              <div className="movie-details__genres">{ currentMovie.genres ? currentMovie.genres.join(' & ') : '' }</div>
               <div className="movie-details__time">
                 <div className="movie-details__year">{ new Date(currentMovie.release_date).getFullYear() }</div>
                 <div className="movie-details__min">{ currentMovie.runtime } min</div>
@@ -35,9 +36,8 @@ const MovieDetails = ({ movies,
           moviesArray.length &&
           (<div className="container related-movies">
             <Movies movies={ moviesArray }
-                  showSorting={ false }
-                  onChangeCurrentMovie={ onChangeCurrentMovie }
-                  info={`Films by ${ searchText } ${ searchBy }`}/>
+                    showSorting={ false }
+                    info={`Films by ${ searchParams.search } ${ searchParams.searchBy }`}/>
           </div>)
         }
       </div>
@@ -45,6 +45,12 @@ const MovieDetails = ({ movies,
   )
 }
 
-export default MovieDetails
+const mapStateToProps = ({ movies }) => ({
+  currentMovie: movies.currentMovie,
+  sameGenreMovies: movies.sameGenreMovies,
+  searchParams: movies.searchParams
+})
+
+export default connect(mapStateToProps)(MovieDetails)
 
 import './movie-details.scss'

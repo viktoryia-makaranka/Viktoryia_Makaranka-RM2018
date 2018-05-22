@@ -1,12 +1,16 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-const Sort = ({ sortData, sortTitle = 'Sort by', onSortChange, activeItem }) => {
+import MOVIES_API from '../../redux/movies/actions'
+
+const Sort = ({ sortData, sortTitle = 'Sort by', changeSortBy, searchParams, getMovies }) => {
   const sortingMap = sortData.map(sortItem => {
     const changeHandler = () => {
-      onSortChange(sortItem.val)
+      changeSortBy(sortItem.val)
+      getMovies({ ...searchParams, sortBy: sortItem.val })
     }
     return (
-      <div className={`sorting__controls-item${ activeItem === sortItem.val ? ' sorting__controls-item--active' : ''}`} onClick={ changeHandler } key={ sortItem.val }>{ sortItem.name }</div>
+      <div className={`sorting__controls-item${ searchParams.sortBy === sortItem.val ? ' sorting__controls-item--active' : ''}`} onClick={ changeHandler } key={ sortItem.val }>{ sortItem.name }</div>
     )
   })
   return (<div className="sorting">
@@ -18,6 +22,20 @@ const Sort = ({ sortData, sortTitle = 'Sort by', onSortChange, activeItem }) => 
   )
 }
 
-export default Sort
+const mapStateToProps = ({ movies }) => ({
+  sortData: movies.sortData,
+  searchParams: movies.searchParams
+})
+
+const mapDispatchToProps = dispatch => ({
+  getMovies(params) {
+    dispatch(MOVIES_API.getMovies(params))
+  },
+  changeSortBy(newVal) {
+    dispatch(MOVIES_API.changeSortBy(newVal))
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sort)
 
 import './sort.scss'
