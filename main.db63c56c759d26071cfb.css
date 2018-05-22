@@ -1,0 +1,185 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0; }
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; }
+  .app-wrapper .content {
+    display: flex;
+    flex-direction: column;
+    flex: 1; }
+  .app-wrapper .no-results {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    font-size: 42px; }
+  .app-wrapper .row {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 100%; }
+  .app-wrapper .flex {
+    align-items: center;
+    display: flex; }
+  .app-wrapper .container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    margin: auto;
+    max-width: 1200px;
+    padding: 0 30px;
+    width: 100%; }
+  .app-wrapper .wrapper {
+    display: flex; }
+  .app-wrapper .flex-1 {
+    flex: 1; }
+  .app-wrapper .flex-2 {
+    flex: 2; }
+.movie-card {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  width: 33.3%; }
+  .movie-card img {
+    width: 100%; }
+  .movie-card__title {
+    font-size: 16px;
+    padding: 3px 0;
+    text-transform: uppercase; }
+    .movie-card__title-row {
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+      padding: 5px 0; }
+  .movie-card__year {
+    align-self: flex-start;
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 3px 5px; }
+  .movie-card__ganres {
+    color: grey;
+    font-size: 14px; }
+.sorting, .sorting__controls {
+  display: flex; }
+
+.sorting__title, .sorting__controls-item:not(:last-child) {
+  margin-right: 15px; }
+
+.sorting__controls-item {
+  cursor: pointer; }
+  .sorting__controls-item--active {
+    color: coral; }
+.movies__list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -15px; }
+
+.movies__controls {
+  background: whitesmoke; }
+  .movies__controls-wrapper {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    padding: 10px 0; }
+.movie-details {
+  margin-top: 55px; }
+  .movie-details .wrapper {
+    align-items: center;
+    background: #333333;
+    display: flex;
+    color: white; }
+  .movie-details__wrapper .container {
+    margin: 0 -15px; }
+  .movie-details__image {
+    align-items: center;
+    display: flex;
+    padding: 30px; }
+  .movie-details__title {
+    color: coral;
+    font-size: 24px;
+    font-weight: bold; }
+  .movie-details__genres {
+    margin: 10px 0; }
+  .movie-details__time {
+    align-items: center;
+    display: flex;
+    font-weight: bold;
+    margin-bottom: 30px; }
+  .movie-details__year {
+    margin-right: 20px; }
+  .movie-details__raiting {
+    border: 1px solid lightgreen;
+    border-radius: 50%;
+    color: lightgreen;
+    font-size: 20px;
+    margin-left: 20px;
+    padding: 5px; }
+  .movie-details__info {
+    padding: 30px; }
+  .movie-details img {
+    width: 100%; }
+.search {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("https://scontent-frt3-2.xx.fbcdn.net/v/t31.0-8/10861143_881441621886298_5012326738164255413_o.jpg?_nc_cat=0&oh=9f6682382a3c4387831bc31585a4985b&oe=5B942DF1") center no-repeat;
+  background-size: cover;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 15px 0 30px; }
+  .search__header {
+    color: coral;
+    margin-bottom: 30px; }
+  .search__title {
+    margin: 20px 0;
+    text-transform: uppercase; }
+  .search__input {
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
+    color: white;
+    outline: none;
+    border-bottom: 2px solid coral;
+    padding: 10px 15px; }
+  .search__controls {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0; }
+  .search__search-by {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 12px;
+    line-height: 1;
+    text-transform: uppercase; }
+    .search__search-by-title {
+      margin-right: 15px; }
+    .search__search-by-item {
+      background: #333333;
+      border-radius: 2px;
+      cursor: pointer;
+      padding: 5px 10px;
+      transition: 0.2s; }
+      .search__search-by-item:not(:last-child) {
+        margin-right: 15px; }
+      .search__search-by-item--active {
+        background: coral; }
+  .search__button {
+    background: coral;
+    border: none;
+    border-radius: 2px;
+    color: white;
+    outline: none;
+    padding: 5px 50px;
+    text-transform: uppercase; }
+footer {
+  background: #333333;
+  display: flex;
+  height: 50px;
+  padding: 10px 0; }
+  footer a {
+    color: coral;
+    text-decoration: none; }
