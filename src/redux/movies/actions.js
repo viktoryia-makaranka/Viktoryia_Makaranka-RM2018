@@ -24,15 +24,30 @@ const MOVIES_API = {
       })
   },
 
-  getSameGenreMovies: (genre) => (dispatch) => {
+  getMovieById: (id) => (dispatch) => {
+    const url = `http://react-cdp-api.herokuapp.com/movies/${id}`
+    return fetch(url)
+      .then(res => res.json())
+      .then(async movie => {
+        await dispatch({
+          type: CHANGE_CURRENT_MOVIE,
+          movie: movie
+        })
+        return Promise.resolve()
+      })
+  },
+
+  getSameGenreMovies: ({ genre, currentMovie }) => (dispatch) => {
     const url = `https://react-cdp-api.herokuapp.com/movies?limit=100&searchBy=genres&search=${genre}`
     return fetch(url)
       .then(res => res.json())
       .then(movies => {
+        const sameGenreMovies = movies.data.filter(movie => currentMovie.id !== movie.id)
         dispatch({
           type: SET_SAME_GENRE_MOVIES,
-          sameGenreMovies: movies.data
+          sameGenreMovies: sameGenreMovies
         })
+        return Promise.resolve()
       })
   },
 

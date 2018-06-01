@@ -1,18 +1,38 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 
 import MOVIES_API from '../../redux/movies/actions'
 
 class Search extends Component {
-  constructor(props) {
-    super(props)
+  constructor(props, context) {
+    super(props, context)
+  }
+
+  async componentDidMount() {
+    const params = new URLSearchParams(this.props.location.search)
+    const searchText = params.get('searchText')
+    if (searchText) {
+      await this.props.changeSearchText(searchText)
+      this.props.getMovies(this.props.searchParams)
+    }
+  }
+
+  async componentWillReceiveProps(nextProps) {
+    const params = new URLSearchParams(this.props.location.search)
+    const newParams = new URLSearchParams(nextProps.location.search)
+
+    if (newParams.get('searchText') !== params.get('searchText')) {
+      await this.props.changeSearchText(params.get('searchText'))
+      this.props.getMovies(nextProps.searchParams)
+    }
   }
 
   render() {
     return (
       <form className="search" onSubmit={ (e) => {
         e.preventDefault()
-        this.props.getMovies(this.props.searchParams)
+        this.props.history.push(`/films?searchText=${this.props.searchParams.search}`)
       }}>
         <div className="container">
           <div className="search__header">netflixroulette</div>
@@ -64,6 +84,6 @@ const mapDispatchToProps = dispatch => ({
   }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Search))
 
 import './search.scss'

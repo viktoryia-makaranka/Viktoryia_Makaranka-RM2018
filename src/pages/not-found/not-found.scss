@@ -1,0 +1,16 @@
+.not-found {
+  align-items: center;
+  background: linear-gradient(
+                  rgba(0, 0, 0, 0.6),
+                  rgba(0, 0, 0, 0.6)
+  ), url('https://scontent-frt3-2.xx.fbcdn.net/v/t31.0-8/10861143_881441621886298_5012326738164255413_o.jpg?_nc_cat=0&oh=9f6682382a3c4387831bc31585a4985b&oe=5B942DF1') center no-repeat;
+  background-size: cover;
+  color: white;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  font-size: 60px;
+  font-weight: bold;
+  justify-content: center;
+  padding: 30px;
+}

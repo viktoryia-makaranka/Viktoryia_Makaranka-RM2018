@@ -46,7 +46,8 @@ module.exports = (env, options) => {
         aggregateTimeout: 300,
         poll: 1000
       },
-      port: 3000
+      port: 3000,
+      historyApiFallback: true
     },
 
     module: {
@@ -72,7 +73,6 @@ module.exports = (env, options) => {
     plugins: [
       new HtmlWebpackPlugin({
         title: 'Vika App',
-        hash: true,
         template: './index.html'
       }),
       new HotModuleReplacementPlugin(),

@@ -1,4 +1,4 @@
-import App from './index'
+import App from './App'
 import React from 'react'
 import jest from 'jest-mock'
 
