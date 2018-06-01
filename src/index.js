@@ -15,7 +15,9 @@ import Films from './pages/Films'
 import MovieDetails from './pages/movie-details/MovieDetails'
 import NotFound from './pages/not-found/NotFound'
 
-const history = createHistory()
+const history = createHistory({
+  base: '/'
+})
 
 const store = createStore(
   reducers,
