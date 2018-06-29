@@ -40,6 +40,7 @@ class Search extends Component {
           <div className="search__title">{ this.props.title }:</div>
           }
           <input type="text"
+                 value={this.props.searchParams.search}
                  className="search__input"
                  placeholder={ this.props.placeholder || '' }
                  onChange={ (e) => { this.props.changeSearchText(e.target.value) }}/>
