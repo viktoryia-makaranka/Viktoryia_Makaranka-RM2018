@@ -1,33 +1,17 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import { Router, Route, Switch, Redirect } from 'react-router'
-import { routerMiddleware } from 'react-router-redux'
-import createHistory from 'history/createBrowserHistory'
-
-import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
-import thunk from 'redux-thunk'
-
-import reducers from './redux/index'
+import { hot } from 'react-hot-loader'
 
 import App from './components/App'
 import Films from './pages/Films'
 import MovieDetails from './pages/movie-details/MovieDetails'
 import NotFound from './pages/not-found/NotFound'
 
-const history = createHistory({
-  base: '/'
-})
+const Root = ({ Router, location = null, context = null, store }) => (
 
-const store = createStore(
-  reducers,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-  applyMiddleware(thunk, routerMiddleware(history))
-)
-
-ReactDOM.render((
-  <Provider store={ store }>
-    <Router history={ history }>
+   <Provider store={ store }>
+    <Router location={ location } context={ context }>
       <App>
         <Switch>
           <Redirect exact from="/" to="/films" />
@@ -38,6 +22,8 @@ ReactDOM.render((
       </App>
     </Router>
   </Provider>
-), document.getElementById('root') || document.createElement('div'))
+)
+
+export default hot(module)(Root)
 
 import './main.scss'

@@ -1,8 +1,8 @@
 {
-  plugins: ['syntax-dynamic-import', 'transform-object-rest-spread'],
+  plugins: ['transform-runtime', 'syntax-dynamic-import', 'transform-object-rest-spread'],
   presets: [['env', {
     targets: {
       browsers: ['last 2 versions'],
     },
-  }], 'react']
+  }], 'react', 'stage-2']
 }

@@ -22,6 +22,16 @@ const initialState = {
 }
 
 export default (state = initialState, action) => {
+  const searchParams = {
+    ...initialState.searchParams,
+    ...state.searchParams
+  }
+  state = {
+    ...initialState,
+    ...state,
+    searchParams
+  }
+
   switch (action.type) {
     case SET_MOVIES: {
       return ({
